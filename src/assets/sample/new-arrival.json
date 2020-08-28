@@ -2,7 +2,7 @@
   {
     "item_name": "name of wine1 very very long very very long verylong verylong verylong",
     "sale": true,
-    "discount": 20,
+    "discount": "TWD $99",
     "vintage": "2018",
     "country": "Taiwan",
     "region": "Taichung",
