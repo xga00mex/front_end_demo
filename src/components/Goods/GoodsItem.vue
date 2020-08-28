@@ -1,5 +1,6 @@
 <template>
   <div class="goods_item" >
+    <div class="onsale" v-if="itemData.sale">sale</div>
     <div class="goods_detail row">
       <div class="goods_info col-8">
         <p class="item_name">{{itemData.item_name}}</p>
@@ -43,7 +44,9 @@
           </div>
         </div>
         <div class="item_price">
-          <p>{{itemData.price}}</p>
+          <p v-if="!itemData.sale">{{itemData.price}}</p>
+          <p v-if="itemData.sale" class="discount_price">{{itemData.discount}}</p>
+          <p v-if="itemData.sale"><s>{{itemData.price}}</s></p>
         </div>
       </div>
       <div class="goods_image col-4">
@@ -57,7 +60,7 @@
         <button class="cart_btn" @click="addToCartAdd">+</button>
       </div>
       <div>
-        <button class="add_to_cart">Add to cart</button>
+        <button class="add_to_cart" :disabled="itemData.onstock == 0">Add to cart</button>
       </div>
       <div></div>
     </div>
@@ -100,6 +103,17 @@ export default {
 @import '../../variable.scss';
   .goods_item {
     box-shadow: 0px 0px 5px gray;
+    .onsale {
+      text-align: center;
+      background-color: red;
+      color: white;
+      width:80px;
+      height:30px;
+      position: absolute;
+      top: -20px;
+      left: 5px;
+      font-size: 20px;
+    }
     .goods_detail {
       @media screen and (min-width: $breakpoint-tablet){
         &:hover {
@@ -177,6 +191,11 @@ export default {
           margin: 15px -15px 0px -10px;
           font-size: 1.5em;
           color: #4e1e1e;
+          .discount_price {
+            color: red;
+            font-size: 1.1em;
+            margin-bottom: 0px;
+          }
         }
       }
       .goods_image {
